@@ -30,7 +30,6 @@ class Motivate extends React.Component<{}, MotivateState> {
     render(){
         if(!this.state.currQuote) return <CircularProgress />
         if(!this.state.currImg) return <CircularProgress />
-        console.log("quote",this.state.currQuote);
         return <div className={styles.container}>
 
             <Typography>

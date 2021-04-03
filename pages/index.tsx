@@ -7,24 +7,24 @@ import MainApp from "../components/mainApp";
 import {
     BrowserRouter,
 } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { doNotification } from "../util/Notification";
+import { CircularProgress } from "@material-ui/core";
 
 
 
 export default function Home(): React.ReactElement {
     const { session, isLoading } = useSession();
+    const [ logging, setLogging ] = useState(null);
 
     useEffect(() => {
         doNotification();
-    }, []);
+        setLogging(location.href.includes("code") && location.href.includes("state"));
+    }, [setLogging]);
 
-    if(isLoading){
-        return <p>Please wait, you are being logged in...</p>;
-    }
 
     if (!session.info.isLoggedIn) {
-        return <LoginForm />;
+        return <LoginForm loading={!(logging == false)} />;
     }
 
     return <BrowserRouter><MainApp session={session} /></BrowserRouter>

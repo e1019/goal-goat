@@ -48,8 +48,6 @@ class GoalEditor extends React.Component<GoalEditorProps, GoalEditorState> {
     }
 
     async saveChanges() {
-        console.log(this.state.goal.category);
-
         this.setState({ isWaiting: true });
         await this.state.goal.push();
         this.exit();

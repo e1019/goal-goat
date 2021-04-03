@@ -1076,6 +1076,22 @@
     "@rdfjs/data-model" "1.1.2"
     "@types/rdf-js" "3.0.0"
 
+"@inrupt/oidc-client-ext@1.7.3-fixstore-race-condition-713030392-5433-1617405392.0":
+  version "1.7.3-fixstore-race-condition-713030392-5433-1617405392.0"
+  resolved "https://registry.yarnpkg.com/@inrupt/oidc-client-ext/-/oidc-client-ext-1.7.3-fixstore-race-condition-713030392-5433-1617405392.0.tgz#70c1c8b601404ac3ff2efe38060a8b18cf2c7e1d"
+  integrity sha512-So6+X2UAf7nfcVVmNoPU7pmLfzc124sxbtg0tAla+JzaG8YrmHkLv65zkSivT6I7WH3JGkGP0VQ3w+AvbQ4u1g==
+  dependencies:
+    "@types/form-urlencoded" "^2.0.1"
+    "@types/jsonwebtoken" "^8.5.0"
+    "@types/node-jose" "^1.1.5"
+    "@types/uuid" "^8.3.0"
+    form-urlencoded "~4.2.1"
+    jose "^2.0.4"
+    jsonwebtoken "^8.5.1"
+    node-jose "^2.0.0"
+    oidc-client "^1.11.3"
+    uuid "^8.3.1"
+
 "@inrupt/oidc-client-ext@^1.7.2":
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/@inrupt/oidc-client-ext/-/oidc-client-ext-1.7.2.tgz#4492eb53e79cbc4b28f61e3051850807427e5dae"
@@ -1115,6 +1131,44 @@
     stream-browserify "^3.0.0"
     tsyringe "^4.4.0"
     util "^0.12.3"
+    uuid "^8.3.1"
+
+"@inrupt/solid-client-authn-browser@^1.7.3-fixstore-race-condition-713030392-5433-1617405392.0":
+  version "1.7.3-fixstore-race-condition-713030392-5433-1617405392.0"
+  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-browser/-/solid-client-authn-browser-1.7.3-fixstore-race-condition-713030392-5433-1617405392.0.tgz#d496029cc9b994e9d8de3f90a63144c74d062bd7"
+  integrity sha512-5cK5M/t5QfdyysXxt3UbWLTK0xfdjp25TZ7zkHmVdp+m3U4Vh4D3XG7YC0iYrwOzaRowij8vy6f4skcsijKgBA==
+  dependencies:
+    "@inrupt/oidc-client-ext" "1.7.3-fixstore-race-condition-713030392-5433-1617405392.0"
+    "@inrupt/solid-client-authn-core" "1.7.3-fixstore-race-condition-713030392-5433-1617405392.0"
+    "@types/form-urlencoded" "^2.0.1"
+    "@types/lodash.clonedeep" "^4.5.6"
+    "@types/node" "^14.14.14"
+    "@types/uuid" "^8.3.0"
+    assert "^2.0.0"
+    browserify-zlib "^0.2.0"
+    buffer "^6.0.3"
+    crypto-browserify "^3.12.0"
+    form-urlencoded "^4.2.1"
+    jose "^2.0.2"
+    lodash.clonedeep "^4.5.0"
+    os-browserify "^0.3.0"
+    reflect-metadata "^0.1.13"
+    stream-browserify "^3.0.0"
+    tsyringe "^4.4.0"
+    util "^0.12.3"
+    uuid "^8.3.1"
+
+"@inrupt/solid-client-authn-core@1.7.3-fixstore-race-condition-713030392-5433-1617405392.0":
+  version "1.7.3-fixstore-race-condition-713030392-5433-1617405392.0"
+  resolved "https://registry.yarnpkg.com/@inrupt/solid-client-authn-core/-/solid-client-authn-core-1.7.3-fixstore-race-condition-713030392-5433-1617405392.0.tgz#dfd36312fb5535a4f06acc3cedef21f1dd01bf40"
+  integrity sha512-6wsPCsp1GxbqKpDKrqNctI+m+6Wr+iTOKaFxblni5vmM6E5aCnFVlJrLP2tDItQKAFB3GDfslKQ8KwAYzRBYvg==
+  dependencies:
+    "@inrupt/solid-common-vocab" "^0.5.3"
+    "@types/lodash.clonedeep" "^4.5.6"
+    "@types/uuid" "^8.3.0"
+    ajv "^6.12.6"
+    cross-fetch "^3.0.6"
+    lodash.clonedeep "^4.5.0"
     uuid "^8.3.1"
 
 "@inrupt/solid-client-authn-core@^1.7.2":
@@ -3620,6 +3674,11 @@ form-urlencoded@^4.2.1:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/form-urlencoded/-/form-urlencoded-4.4.2.tgz#92913ec8e7375824fa1cc2d13093c8d30a122a8f"
   integrity sha512-6sZj0HI9tCcGuzC9W/nkHvNLAjOo1G/jjnNluChOGMwn75Po6g5nGYASxQUJeSQHLng1SpovGjQr1f4xz1PqQw==
+
+form-urlencoded@~4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/form-urlencoded/-/form-urlencoded-4.2.1.tgz#264d0b4524a87332e94f606237493fb5d26dcd84"
+  integrity sha512-0eFJroOH2qaqc/630d4YZpmsyKmh6sfq/1z3YMXvFab0O6teGnf8640C7gufikwbQJFaC6nPlG4d/GiYVN+Dcw==
 
 fragment-cache@^0.2.1:
   version "0.2.1"

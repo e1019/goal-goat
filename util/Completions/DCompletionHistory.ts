@@ -5,6 +5,7 @@ import { DGoal } from "../DGoal";
 import { GoalInterval, goalIntervalData } from "../GoalFormat";
 import SortedList from "../Sort/SortedList";
 import DBooleanCompletion from "./DBooleanCompletion";
+import HashMap, { StringHasher } from "../Map/HashMap";
 
 const FILE_SUFFIX = ".ch.ttl";
 
@@ -23,6 +24,8 @@ type CompletionCache = {
     sorted: SortedList<DAbstractCompletion>;
 
     analytics: CompletionAnalytics;
+
+    urlToCompletion: HashMap<string, DAbstractCompletion>;
 };
 
 class DCompletionHistory extends DDatasetBase {
@@ -89,9 +92,6 @@ class DCompletionHistory extends DDatasetBase {
                     if(val) numYes++;
 
                     currAnalytics.longest_streak = Math.max(currAnalytics.longest_streak, currentStreak);
-
-                    console.log(`${this.parentGoal.name} ${DCompletionHistory.relativeDateForInterval(completion.date, this.parentGoal.interval)} - ${val}`)
-                    console.log(`Current streak: ${currentStreak}, longest: ${currAnalytics.longest_streak}`)
                 }
             }
             currAnalytics.current_streak = currentStreak;
@@ -114,7 +114,6 @@ class DCompletionHistory extends DDatasetBase {
 
         DDatasetBase.cloneSession(parentList, this);
         this.cache = null;
-        console.log("Constructed for",goal.name);
     }
 
     public async delete(){
@@ -135,7 +134,6 @@ class DCompletionHistory extends DDatasetBase {
         if(!this.ready) return null;
 
         if(this.cache == null || this.cache.normalList == null){
-            console.log("Cache invalid, rebuilding for " + this._parentGoal.name);
             const things =  this.getAllThings();
             const validThings = things.filter((v) => DAbstractCompletion.isThingValid(v));
             const list = validThings.map((v) => createCompletionFromThing(v));
@@ -143,7 +141,8 @@ class DCompletionHistory extends DDatasetBase {
             this.cache = {
                 normalList: list,
                 sorted: null,
-                analytics: this.cache && this.cache.analytics
+                analytics: this.cache && this.cache.analytics,
+                urlToCompletion: this.cache && this.cache.urlToCompletion
             };
 
             return list;
@@ -160,7 +159,8 @@ class DCompletionHistory extends DDatasetBase {
             this.cache = {
                 normalList: this.cache.normalList,
                 sorted: sortedList,
-                analytics: this.cache && this.cache.analytics
+                analytics: this.cache && this.cache.analytics,
+                urlToCompletion: this.cache && this.cache.urlToCompletion
             };
 
             return sortedList;
@@ -169,18 +169,36 @@ class DCompletionHistory extends DDatasetBase {
         return this.cache.sorted;
     }
 
+    private findCompletionInList(url: string): DAbstractCompletion {
+        const completionList = this.getCompletions();
+
+        for(const v of completionList){
+            if(v.url == url){
+                return v;
+            }
+        }
+
+        return null;
+    }
+
     public getCompletion(url: string) : DAbstractCompletion {
         if(!this.ready) return null;
+        
+        if(this.cache == null || this.cache.urlToCompletion == null){
+            this.getCompletions(); // ensure cache and normalList are at least initialized
+            this.cache.urlToCompletion = new HashMap<string, DAbstractCompletion>(StringHasher);
+        }
 
-        const completions = this.getCompletions();
-
-        console.log("Search",url);
-
-        const list = completions.filter((v) => v.url === url);
-        if(list.length == 0) { console.log("Unfound"); return null; };
-        if(list.length > 1) console.log("Wow!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-        return list[0];
+        const val = this.cache.urlToCompletion.get(url);
+        if(val){
+            return val;
+        }else{
+            const comp = this.findCompletionInList(url);
+            if(!comp) return null;
+            
+            this.cache.urlToCompletion.insert(url, comp);
+            return comp;
+        }
     }
 
     private getClosestCompletion(date: Date) : DAbstractCompletion {

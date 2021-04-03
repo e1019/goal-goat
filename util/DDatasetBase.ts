@@ -120,10 +120,7 @@ abstract class DDatasetBase {
     }
 
     protected getAllThings(): Thing[] {
-        if(!this.dataset){
-            console.log("Dataset is nonexistent");
-            return null;
-        }
+        if(!this.dataset) return null;
 
         return getThingAll(this.dataset);
     }

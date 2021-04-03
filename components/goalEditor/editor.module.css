@@ -1,6 +1,10 @@
 .parDiv {
     display: flex;
     flex-direction: column;
+
+    padding: 16px;
+    background: #fff;
+    border-radius: 6px;
 }
 
 .editorItem {

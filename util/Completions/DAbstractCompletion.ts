@@ -58,7 +58,6 @@ abstract class DAbstractCompletion {
     public abstract setValueFromString(val: string): boolean;
 
     public static isThingValid(thing: Thing): boolean {
-        console.log(getUrl(thing, NS.TYPE), CompletionNS.TYPE);
         return getUrl(thing, NS.TYPE) === CompletionNS.TYPE;
     }
 

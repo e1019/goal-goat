@@ -13,6 +13,7 @@
     "@emotion/core": "^11.0.0",
     "@inrupt/lit-generated-vocab-common": "^0.3.11",
     "@inrupt/solid-client": "^1.6.1-fix957-400-on-put-708057607-3196-1617269842.0",
+    "@inrupt/solid-client-authn-browser": "^1.7.3-fixstore-race-condition-713030392-5433-1617405392.0",
     "@inrupt/solid-ui-react": "^2.1.1",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",

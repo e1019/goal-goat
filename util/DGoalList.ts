@@ -71,13 +71,11 @@ class DGoalList extends DDatasetBase {
 
         const val = this.cache.urlToGoal.get(url);
         if(val){
-            console.log("Cached map",url);
             return val;
         }else{
             const goal = this.findGoalInList(url);
             if(!goal) return null;
             
-            console.log("Insert to cache",url)
             this.cache.urlToGoal.insert(url, goal);
             return goal;
         }
