@@ -1,21 +1,18 @@
-import { Button, Card, CardActionArea, CardContent, CircularProgress, Dialog, DialogTitle, Link, Typography } from "@material-ui/core";
 import React from "react";
-import Callable from "../../util/Callable";
-import DAbstractCompletion from "../../util/Completions/DAbstractCompletion";
-import DCompletionHistory from "../../util/Completions/DCompletionHistory";
-import { DGoal } from "../../util/DGoal";
-import DatePickerDialog from "../dialogs/datePicker"
+
+import { Button, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
+import { Skeleton } from '@material-ui/lab';
 
 import { withRouter, History } from "react-router-dom";
 
-import GoalDataInner from "../goalView/goalDataInner"
+import Callable from "../../util/Callable";
+import { DGoal } from "../../util/DGoal";
+import DCompletionHistory from "../../util/Completions/DCompletionHistory";
 
-import styles from "../list.module.css"
+import GoalDataInner from "../goalView/goalDataInner";
 
-import relativeDate from "tiny-relative-date"
+import styles from "../list.module.css";
 
-
-import { Skeleton } from '@material-ui/lab';
 
 type CompletionListProps = {
     goal: DGoal;
@@ -48,9 +45,8 @@ class CompletionList extends React.Component<CompletionListProps, CompletionList
 
 
     render() {
-
         let completionList = [];
-
+        
         let sortedCompletions = null;
 
         if(this.props.goal.completionHistory.ready){
@@ -62,7 +58,7 @@ class CompletionList extends React.Component<CompletionListProps, CompletionList
                 return <div className={styles.listItem} key={v.url}>
                     <Card>
                         <CardActionArea onClick={() => {
-                            this.props.history.push("/completion/" + this.props.goal.url64 + "/" + String(v.date.getTime()))
+                            this.props.history.push("/completion/" + this.props.goal.url64 + "/" + String(v.date.getTime()));
                         }}>
                             <CardContent>
                                 <Typography>
@@ -75,8 +71,7 @@ class CompletionList extends React.Component<CompletionListProps, CompletionList
                             </CardContent>
                         </CardActionArea>
                     </Card>
-
-                </div>
+                </div>;
             });
         }else{
             for(let i=0; i<3; i++){
@@ -84,7 +79,7 @@ class CompletionList extends React.Component<CompletionListProps, CompletionList
                     <div className={styles.listItem} key={i}>
                         <Skeleton variant="rect" animation="wave" height={77} />
                     </div>
-                )
+                );
             }
         }
         
@@ -107,18 +102,18 @@ class CompletionList extends React.Component<CompletionListProps, CompletionList
                 <div className={styles.actionButtonList}>
                     <div className={styles.actionButton}>
                         <Button variant="contained" color="primary" onClick={() => {
-                            this.props.history.push("/completion/" + this.props.goal.url64 + "/" + String((new Date()).getTime()))
+                            this.props.history.push("/completion/" + this.props.goal.url64 + "/" + String((new Date()).getTime()));
                         }}>Add</Button>
                     </div>
 
                     <div className={styles.actionButton}>
                         <Button variant="outlined" color="primary" onClick={() => {
-                            this.props.history.push("/edit/" + this.props.goal.url64)
+                            this.props.history.push("/edit/" + this.props.goal.url64);
                         }}>Edit</Button>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 };
 

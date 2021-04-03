@@ -1,5 +1,5 @@
 import { SessionProvider } from "@inrupt/solid-ui-react";
-import Head from 'next/head'
+import Head from 'next/head';
 
 interface IApp {
     Component: React.ComponentType<any>;
@@ -9,7 +9,7 @@ interface IApp {
 export default function App(props: IApp): React.ReactElement {
     const { Component, pageProps } = props;
 
-    const style = "body { background: linear-gradient(#F6F6F6, #E8E8E8) fixed; }"
+    const style = "body { background: linear-gradient(#F6F6F6, #E8E8E8) fixed; }";
 
     return (
         <div>

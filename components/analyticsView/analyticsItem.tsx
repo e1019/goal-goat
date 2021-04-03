@@ -3,7 +3,6 @@ import React from "react";
 import DCompletionHistory from "../../util/Completions/DCompletionHistory";
 import SortedList from "../../util/Sort/SortedList";
 import GoalView, { GoalViewMode } from "../goalView";
-
 import styles from "../list.module.css";
 
 type AnalyticsItemProps = {
@@ -15,10 +14,10 @@ type AnalyticsItemProps = {
 }
 
 class AnalyticsItem extends React.Component<AnalyticsItemProps> {
-    render(){
-        if(this.props.list == null) return <CircularProgress />
+    render() {
+        if(this.props.list == null) return <CircularProgress />;
 
-        let list = [];
+        const list = [];
         for(let i=0; i<Math.min(this.props.itemsToShow, this.props.list.length); i++){
             const v = this.props.list.get(i);
             const txt = this.props.getExtraText(v);
@@ -27,7 +26,7 @@ class AnalyticsItem extends React.Component<AnalyticsItemProps> {
                 <div key={i}>
                     <GoalView goal={v.parentGoal} mode={GoalViewMode.RedirectToEdit} className={styles.listItem} extraText={txt} />
                 </div>
-            )
+            );
         }
 
         if(list.length == 0) return null;
@@ -37,7 +36,7 @@ class AnalyticsItem extends React.Component<AnalyticsItemProps> {
                 {this.props.headerText}
             </Typography>
             {list}
-        </div>
+        </div>;
     }
 };
 

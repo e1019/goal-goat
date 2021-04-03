@@ -1,9 +1,9 @@
 import { asUrl, createThing, getUrl, setDatetime, setInteger, setUrl, Thing } from "@inrupt/solid-client";
-import DCompletionHistory from "./DCompletionHistory";
+
 import { CompletionType, GoalInterval } from "../GoalFormat";
-import { NS } from "../SolidUtil";
 import { CompletionNS } from "./CompletionUtil";
 import Callable from "../Callable";
+import { NS } from "../SolidUtil";
 
 type EditorLayout = {
     titleText: string,
@@ -61,12 +61,12 @@ abstract class DAbstractCompletion {
         return getUrl(thing, NS.TYPE) === CompletionNS.TYPE;
     }
 
-    public abstract getEditor(onUpdate: Callable, interval: GoalInterval): EditorLayout;
+    public abstract getEditor(onUpdate: Callable): EditorLayout;
 };
 
 const compareCompletions = (a: DAbstractCompletion, b: DAbstractCompletion): number => {
     return a.date.getTime() - b.date.getTime();
-}
+};
 
 export default DAbstractCompletion;
 export { compareCompletions };

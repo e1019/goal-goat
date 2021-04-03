@@ -1,11 +1,11 @@
 import { createCompletionFromThing, createCompletionOfType } from "./CompletionUtil";
 import DAbstractCompletion, { compareCompletions } from "./DAbstractCompletion";
+import { GoalInterval, goalIntervalData } from "../GoalFormat";
+import HashMap, { StringHasher } from "../Map/HashMap";
+import DBooleanCompletion from "./DBooleanCompletion";
+import SortedList from "../Sort/SortedList";
 import DDatasetBase from "../DDatasetBase";
 import { DGoal } from "../DGoal";
-import { GoalInterval, goalIntervalData } from "../GoalFormat";
-import SortedList from "../Sort/SortedList";
-import DBooleanCompletion from "./DBooleanCompletion";
-import HashMap, { StringHasher } from "../Map/HashMap";
 
 const FILE_SUFFIX = ".ch.ttl";
 
@@ -41,7 +41,7 @@ class DCompletionHistory extends DDatasetBase {
         const sortedCompletion = this.getSortedCompletions();
         
 
-        let currAnalytics: CompletionAnalytics = {
+        const currAnalytics: CompletionAnalytics = {
             mean: 0,
             standard_deviation: 0,
             current_streak: 0,
@@ -49,7 +49,7 @@ class DCompletionHistory extends DDatasetBase {
             longest_streak: 0,
             percentage: 0,
             num_elements: 0
-        }
+        };
         
         if(sortedCompletion == null) return currAnalytics;
         const completionAscending = sortedCompletion.list.reverse();
@@ -190,15 +190,14 @@ class DCompletionHistory extends DDatasetBase {
         }
 
         const val = this.cache.urlToCompletion.get(url);
-        if(val){
-            return val;
-        }else{
-            const comp = this.findCompletionInList(url);
-            if(!comp) return null;
+        
+        if(val) return val;
+
+        const comp = this.findCompletionInList(url);
+        if(!comp) return null;
             
-            this.cache.urlToCompletion.insert(url, comp);
-            return comp;
-        }
+        this.cache.urlToCompletion.insert(url, comp);
+        return comp;
     }
 
     private getClosestCompletion(date: Date) : DAbstractCompletion {
@@ -253,7 +252,7 @@ class DCompletionHistory extends DDatasetBase {
 
         const pluralize = (s: string, num: number): string => {
             return (s) + ((num == 1) ? "" : "s");
-        }
+        };
 
         if(days > 0) return `${days} ${pluralize("day", days)} remaining`;
         if(hours > 0) return `${hours} ${pluralize("hour", hours)} remaining`;

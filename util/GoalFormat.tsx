@@ -1,7 +1,8 @@
-import { OverridableComponent } from "@material-ui/core/OverridableComponent";
-import { Fastfood, Favorite, FiberManualRecord, RecordVoiceOver, School, SportsFootball, Straighten, Work } from "@material-ui/icons";
 import React from "react";
 
+import { Fastfood, Favorite, RecordVoiceOver, School, SportsFootball, Straighten, Work } from "@material-ui/icons";
+
+import { format } from "date-fns";
 import "datejs";
 
 const HabitNS = {
@@ -42,8 +43,6 @@ type GoalIntervalInfo = EnumInfo & {
     convertToHumanReadable: (diff: number, date: Date) => string; 
 };
 
-import { format } from 'date-fns'
-
 const MS2DAY = 1000 * 3600 * 24;
 const goalIntervalData: EnumMetadata<GoalInterval, GoalIntervalInfo> = {
     [GoalInterval.DAY]: {
@@ -58,7 +57,7 @@ const goalIntervalData: EnumMetadata<GoalInterval, GoalIntervalInfo> = {
             if(diff == 1) return "yesterday";
             if(diff < 7) return String(diff) + " days ago";
 
-            return format(date, "MMMM d, y")
+            return format(date, "MMMM d, y");
         }
     },
 
@@ -113,11 +112,10 @@ const goalIntervalData: EnumMetadata<GoalInterval, GoalIntervalInfo> = {
             if(diff == 1) return "last month";
             if(diff < 4) return String(diff) + " months ago";
 
-            return format(date, "MMMM y")
+            return format(date, "MMMM y");
         }
     }
 };
-
 
 
 enum GoalCategory {
@@ -159,7 +157,7 @@ const completionTypeData: EnumMetadata<CompletionType, CompletionTypeInfo> = {
     [CompletionType.BOOLEAN]: {friendly_name: "Yes/No"},
     [CompletionType.INTEGER]: {friendly_name: "Numerical"},
     [CompletionType.FLOAT]: {friendly_name: "Decimal"}
-}
+};
 
 
 export {

@@ -1,9 +1,11 @@
-import { Link, Typography } from "@material-ui/core";
 import React from "react";
-import { DGoal } from "../../util/DGoal";
-import { completionTypeData, goalCategoryData, goalIntervalData } from "../../util/GoalFormat";
 
-import styles from "./goalView.module.css"
+import { Typography } from "@material-ui/core";
+
+import { completionTypeData, goalCategoryData, goalIntervalData } from "../../util/GoalFormat";
+import { DGoal } from "../../util/DGoal";
+
+import styles from "./goalView.module.css";
 
 
 type GoalDataInnerProps = {

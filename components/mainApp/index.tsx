@@ -1,41 +1,28 @@
 import React from "react";
-import {
-    BrowserRouter,
-    Switch,
-    Route,
-    Link,
-    Provider
-} from "react-router-dom";
-import DGoalList from "../../util/DGoalList";
-import GoalListView from "../goalListView";
-import { Session } from "@inrupt/solid-ui-react/dist";
-
 import base64url from "base64url";
+
+import { Button, CircularProgress, Typography } from "@material-ui/core";
+
+import { Switch, Route, Link, withRouter, History } from "react-router-dom";
+
+import { CombinedDataProvider, Text } from "@inrupt/solid-ui-react";
+import { Session } from "@inrupt/solid-ui-react/dist";
+import { FOAF } from "@inrupt/lit-generated-vocab-common";
+
+import DGoalList from "../../util/DGoalList";
+
+import CompletionEditor from "../completionEditor";
+import GoalListView from "../goalListView";
 import GoalEditor from "../goalEditor";
-import { Button, ButtonBase, CircularProgress, makeStyles, Typography } from "@material-ui/core";
+import { GoalViewMode } from "../goalView";
+import CompletionList from "../completionList";
+import AnalyticsView from "../analyticsView";
+import Motivate from "../motivate";
 
-import { withRouter, History } from "react-router-dom";
-import CompletionEditor from "../completionEditor"
-import { Add, Home, List, Person, Timeline } from "@material-ui/icons";
-
+import Navigation from "./navigation";
 
 import styles from "../app.module.css";
 
-import NavigationButton from "./navigationButton"
-
-class Navigation extends React.Component {
-    render() {
-        return (
-            <div className={styles.topNavBar}>
-                <NavigationButton tgtUrl="/goals" icon={<List />} />
-                <NavigationButton tgtUrl="/analytics" icon={<Timeline />} />
-                <NavigationButton tgtUrl="/" icon={<Home />} />
-                <NavigationButton tgtUrl="/user" icon={<Person />} />
-                <NavigationButton tgtUrl="/add" icon={<Add />} />
-            </div>
-        )
-    }
-};
 
 type MainAppProps = {
     session: Session;
@@ -45,20 +32,7 @@ type MainAppProps = {
 type MainAppState = {
     goalList?: DGoalList;
     loading: boolean;
-};
-
-
-import { CombinedDataProvider, LogoutButton, Text } from "@inrupt/solid-ui-react";
-import { FOAF } from "@inrupt/lit-generated-vocab-common";
-import { createCompletionOfType } from "../../util/Completions/CompletionUtil";
-import Callable from "../../util/Callable";
-import { GoalViewMode } from "../goalView";
-import DAbstractCompletion from "../../util/Completions/DAbstractCompletion";
-import CompletionList from "../completionList";
-import AnalyticsView from "../analyticsView";
-import Motivate from "../motivate";
-
-
+}
 
 class MainApp extends React.Component<MainAppProps, MainAppState> {
     constructor(props) {
@@ -82,28 +56,28 @@ class MainApp extends React.Component<MainAppProps, MainAppState> {
         if (!goal) {
             return <Typography>
                 The goal couldn't be found. Would you like to <Link to="/">go home?</Link>
-            </Typography>
+            </Typography>;
         }
 
         if (date === "list") {
-            return <CompletionList goal={goal} />
+            return <CompletionList goal={goal} />;
         }
 
         const dateObj = new Date(Number(date));
 
-        return <CompletionEditor goal={goal} date={dateObj} />
+        return <CompletionEditor goal={goal} date={dateObj} />;
     }
 
     renderEdit(id) {
         const goal = this.state.goalList.getGoal(base64url.decode(id));
         if (!goal) {
             return <Typography>
-                The goal couldn't be found. Would you like to <Link to="/">go home?  </Link>
-            </Typography>
+                The goal couldn't be found. Would you like to <Link to="/">go home?</Link>
+            </Typography>;
         }
         return <div>
             <GoalEditor goal={goal} />
-        </div>
+        </div>;
     }
 
     render() {
@@ -111,11 +85,8 @@ class MainApp extends React.Component<MainAppProps, MainAppState> {
         const { webId } = this.props.session.info;
 
         if (this.state.goalList == null || this.state.loading) {
-            body = (
-                <CircularProgress />
-            )
+            body = <CircularProgress />;
         } else {
-            // TODO: max height fix
             body = (
                 <div>
                     <Switch>
@@ -164,16 +135,16 @@ class MainApp extends React.Component<MainAppProps, MainAppState> {
                                 <CombinedDataProvider datasetUrl={webId} thingUrl={webId}>
                                     <Text property={FOAF.name.iri.value} />
                                 </CombinedDataProvider>!
-
-                                    Here's your list of goals for today.
-                                </Typography>
+                                Here's your list of goals for today.
+                            </Typography>
                             <GoalListView mode={GoalViewMode.RedirectToAddCompletion} goalList={this.state.goalList} timed={true} />
                         </Route>
 
                         <Route>
-                            <p>No match</p>
+                            <Typography>
+                                This page does not exist. Try going <Link to="/">home</Link>.
+                            </Typography>
                         </Route>
-
                     </Switch>
                 </div>
             );
@@ -194,7 +165,7 @@ class MainApp extends React.Component<MainAppProps, MainAppState> {
                     </Route>
                 </div>
             </div>
-        )
+        );
     }
 };
 

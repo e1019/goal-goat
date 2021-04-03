@@ -1,12 +1,12 @@
-import { Button, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";
 import React from "react";
-import { DGoal } from "../../util/DGoal";
-import DGoalList from "../../util/DGoalList";
 
+import { Card, CardActionArea, CardContent } from "@material-ui/core";
 import { withRouter, History } from "react-router-dom";
 
+import { DGoal } from "../../util/DGoal";
 
 import GoalDataInner from "./goalDataInner";
+
 
 enum GoalViewMode {
     RedirectToAddCompletion,
@@ -22,13 +22,13 @@ type GoalViewProps = {
 };
 
 type GoalViewState = {
+
 };
 
 class GoalView extends React.Component<GoalViewProps, GoalViewState> {
     constructor(props) {
         super(props);
     }
-    // TODO: 15 hours remaining, etc
 
     private static getRedirectUrl(mode: GoalViewMode, goal: DGoal): string {
         switch (mode) {
@@ -38,25 +38,27 @@ class GoalView extends React.Component<GoalViewProps, GoalViewState> {
             case GoalViewMode.RedirectToAddCompletion:
                 return "/completion/" + goal.url64 + "/" + (new Date()).getTime();
         }
+
+        return "";
     }
 
     render() {
         return (
             <div className={this.props.className}>
                 <Card>
-                    <CardActionArea onClick={() => { this.props.history.push(GoalView.getRedirectUrl(this.props.mode, this.props.goal)) }}>
+                    <CardActionArea onClick={() => { this.props.history.push(GoalView.getRedirectUrl(this.props.mode, this.props.goal)); }}>
                         <CardContent>
                             <GoalDataInner goal={this.props.goal} extraText={this.props.extraText} />
                         </CardContent>
                     </CardActionArea>
                 </Card>
             </div>
-        )
+        );
     }
 };
 
 
 
 export default withRouter(GoalView);
+export type { GoalViewProps };
 export { GoalViewMode };
-export type { GoalViewProps }

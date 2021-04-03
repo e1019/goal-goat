@@ -1,11 +1,10 @@
-import { CircularProgress, Typography } from "@material-ui/core";
 import React from "react";
-
 import coolImages from "cool-images";
 import quote from "inspirational-quotes";
 
-import styles from "./motivate.module.css"
+import { CircularProgress, Typography } from "@material-ui/core";
 
+import styles from "./motivate.module.css";
 
 
 type MotivateState = {
@@ -24,12 +23,12 @@ class Motivate extends React.Component<{}, MotivateState> {
     }
 
     componentDidMount(){
-        this.setState({currQuote: quote.getQuote(), currImg: coolImages.one(600, 800, true, true)})
+        this.setState({currQuote: quote.getQuote(), currImg: coolImages.one(600, 800, true, true)});
     }
 
     render(){
-        if(!this.state.currQuote) return <CircularProgress />
-        if(!this.state.currImg) return <CircularProgress />
+        if(!this.state.currQuote) return <CircularProgress />;
+        if(!this.state.currImg) return <CircularProgress />;
         return <div className={styles.container}>
 
             <Typography>

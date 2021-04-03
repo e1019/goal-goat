@@ -1,7 +1,9 @@
-import { getInteger, getUrl, Thing } from "@inrupt/solid-client";
+import { getInteger, Thing } from "@inrupt/solid-client";
+
 import { CompletionType } from "../GoalFormat";
-import { NS } from "../SolidUtil";
+
 import DAbstractCompletion from "./DAbstractCompletion";
+
 import DBooleanCompletion from "./DBooleanCompletion";
 import DFloatCompletion from "./DFloatCompletion";
 import DIntegerCompletion from "./DIntegerCompletion";
@@ -11,7 +13,7 @@ const CompletionNS = {
     CTYPE: "https://example.com/completion#ctype",
     VALUE: "https://example.com/completion#value",
     DATE: "https://example.com/completion#date"
-}
+};
 
 function getClassFromType(type: CompletionType){
     switch(type){
@@ -40,4 +42,4 @@ function createCompletionOfType(type: CompletionType, date: Date = new Date()) :
     return new T(date);
 }
 
-export { createCompletionFromThing, CompletionNS, createCompletionOfType }
+export { createCompletionFromThing, CompletionNS, createCompletionOfType };

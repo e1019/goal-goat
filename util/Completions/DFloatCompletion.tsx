@@ -1,14 +1,14 @@
-import { getBoolean, getDatetime, getInteger, getStringNoLocale, setBoolean, setInteger, setStringNoLocale, Thing } from "@inrupt/solid-client";
-import DCompletionHistory from "./DCompletionHistory";
-import { CompletionType, GoalInterval } from "../GoalFormat";
-import { CompletionNS } from "./CompletionUtil";
-import DAbstractCompletion, {EditorLayout} from "./DAbstractCompletion";
-import { Button, Link, TextField, Typography } from "@material-ui/core";
 import React from "react";
-import Callable from "../Callable";
-import relativeDate from 'tiny-relative-date';
 
-import styles from "./completioneditingstyles.module.css"
+import { getDatetime, getStringNoLocale, setStringNoLocale, Thing } from "@inrupt/solid-client";
+import { TextField } from "@material-ui/core";
+
+import DAbstractCompletion, {EditorLayout} from "./DAbstractCompletion";
+import { CompletionNS } from "./CompletionUtil";
+import { CompletionType } from "../GoalFormat";
+import Callable from "../Callable";
+
+import styles from "./completioneditingstyles.module.css";
 
 class DFloatCompletion extends DAbstractCompletion {
     public getType() {
@@ -17,7 +17,7 @@ class DFloatCompletion extends DAbstractCompletion {
 
     public getAsString() {
         const val = getStringNoLocale(this.thing, CompletionNS.VALUE);
-        if(val == null) return ""
+        if(val == null) return "";
         return val;
     }
 
@@ -37,7 +37,7 @@ class DFloatCompletion extends DAbstractCompletion {
         );
     }
 
-    public getEditor(onUpdate: Callable, interval: GoalInterval): EditorLayout {
+    public getEditor(onUpdate: Callable): EditorLayout {
         const editorElement = (
             <div className={styles.buttonContainer}>
                 <TextField type="number" onChange={(ev) => {
@@ -47,7 +47,7 @@ class DFloatCompletion extends DAbstractCompletion {
             </div>
         );
 
-        return {titleText: "How did you complete this goal", editorElement}
+        return {titleText: "How did you complete this goal", editorElement};
     }
 };
 

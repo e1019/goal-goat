@@ -1,39 +1,28 @@
 
 import {
-    addDatetime,
-    addStringNoLocale,
-    addUrl,
-    asUrl,
-    createSolidDataset,
-    createThing,
     deleteSolidDataset,
-    getDatetime,
-    getSolidDataset,
-    getSourceUrl,
-    getStringNoLocale,
+    saveSolidDatasetAt,
+    
     getThing,
     getThingAll,
-    getUrl,
+    
     isThing,
     removeThing,
-    saveSolidDatasetAt,
     setThing,
-    setUrl,
+
+    WithChangeLog,
     SolidDataset,
     Thing,
-    Url,
-    WithChangeLog
+    Url
 } from "@inrupt/solid-client";
-
 import { Session } from "@inrupt/solid-client-authn-browser";
-import { DGoal, HabitNS } from "./DGoal";
-import { getPodUri, NS, getOrCreateDataset } from "./SolidUtil";
+
+import { getOrCreateDataset } from "./SolidUtil";
 import Callable from "./Callable";
 import Mutex from "./Mutex";
 
 type ThingID = string | Url;
 
-// static caching
 type Cache = any;
 
 abstract class DDatasetBase {

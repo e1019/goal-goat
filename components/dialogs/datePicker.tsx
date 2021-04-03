@@ -1,14 +1,8 @@
-
-import Callable from "../../util/Callable";
-import DAbstractCompletion from "../../util/Completions/DAbstractCompletion";
-import DCompletionHistory from "../../util/Completions/DCompletionHistory";
-import { DGoal } from "../../util/DGoal";
-
-import { withRouter } from "react-router-dom";
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-
 import DateFnsUtils from '@date-io/date-fns';
-import DialogBase from "./base"
+
+import DialogBase from "./base";
+
 
 type DatePickerProps = {
     initialDate: Date;
@@ -44,7 +38,7 @@ class DatePickerDialog extends DialogBase<DatePickerProps, DatePickerState> {
                 onChange={(date) => {
                     this.setState({ date });
                 }}
-                onSubmit={() => {this.close()}}
+                onSubmit={() => {this.close();}}
                 disableFuture={this.props.onlyPast}
             />
         </MuiPickersUtilsProvider>;

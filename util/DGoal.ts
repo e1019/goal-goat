@@ -1,14 +1,32 @@
-import { addDatetime, addStringNoLocale, asUrl, createThing, getDatetime, getInteger, getIntegerAll, getStringNoLocale, getUrl, removeInteger, setDatetime, setInteger, setStringNoLocale, setUrl, Thing, UrlString } from "@inrupt/solid-client";
-import DGoalList from "./DGoalList";
-import { NS, deleteAllInts, deleteAllStrings } from './SolidUtil'
-import { CompletionType, GoalCategory, GoalInterval, GoalIntervalInfo, HabitNS } from "./GoalFormat"
+import { 
+    asUrl,
+    createThing,
+
+    setInteger,
+    getInteger,
+    
+    setUrl,
+    getUrl,
+    
+    getDatetime,
+    setDatetime,
+    
+    setStringNoLocale,
+    getStringNoLocale,
+    
+    Thing
+} from "@inrupt/solid-client";
 
 import crypto from "crypto";
-
 import base64url from "base64url";
+import relativeDate from "tiny-relative-date";
+
+import { CompletionType, GoalCategory, GoalInterval, HabitNS } from "./GoalFormat";
+import { NS, deleteAllInts } from "./SolidUtil";
+import DGoalList from "./DGoalList";
+
 import DCompletionHistory from "./Completions/DCompletionHistory";
 
-import relativeDate from 'tiny-relative-date';
 
 type DGoalContents = {
     name: string,
@@ -40,20 +58,21 @@ class DGoal {
         this._dirty = (this.originalThing != this.associatedThing);
     }
 
-    private _dirty: boolean = false;
+    private _dirty = false;
 
     public get dirty(){
         return this._dirty;
     }
 
+    private isNew: boolean;
+
 
     private _name: string;
-    private _created: Date;
     private _interval: GoalInterval;
     private _category: GoalCategory;
     private _completionType: CompletionType;
 
-    private _completionDatasetName: string = "";
+    private _completionDatasetName = "";
     private _completionHistory: DCompletionHistory;
     public get completionHistory(){
         return this._completionHistory;
@@ -70,19 +89,20 @@ class DGoal {
         this.contaminate();
     }
 
-    // TODO: private this
     public get created(){
-        return this._created;
+        return getDatetime(this.associatedThing, HabitNS.CREATED);
     }
-    public set created(to: Date){
-        this._created = to;
-        this.associatedThing = setDatetime(this.associatedThing, HabitNS.CREATED, to);
 
-        this.contaminate();
+    public set created(to: Date){
+        if(this.isNew){
+            setDatetime(this.associatedThing, HabitNS.CREATED, to);
+            this.contaminate();
+        }
     }
+
     // human-readable
     public get created_relative(): string {
-        return relativeDate(this._created);
+        return relativeDate(this.created);
     }
 
 
@@ -137,7 +157,7 @@ class DGoal {
     }
 
     constructor(contents: DGoalContents){
-        let isNew = false;
+        this.isNew = false;
 
         contents = DGoal.defaultizeGoalContents(contents);
 
@@ -146,7 +166,7 @@ class DGoal {
             // Generate a new thing
             this.associatedThing = createThing();
             this.associatedThing = setUrl(this.associatedThing, NS.TYPE, HabitNS.TYPE);
-            isNew = true;
+            this.isNew = true;
         }
 
         this.name = contents.name;
@@ -158,9 +178,9 @@ class DGoal {
 
         this.originalThing = this.associatedThing;
 
-        this._dirty = isNew;
+        this._dirty = this.isNew;
 
-        if(!isNew){
+        if(!this.isNew){
             this._completionDatasetName = crypto.createHash("sha256").update(this.url).digest("hex");
             this._completionHistory = new DCompletionHistory(this, this._completionDatasetName);
         }

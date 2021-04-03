@@ -1,23 +1,17 @@
-import { CircularProgress, Typography } from "@material-ui/core";
 import React from "react";
 
-import {
-    BrowserRouter,
-    Switch,
-    Route,
-    Link,
-    Provider
-} from "react-router-dom";
+import { CircularProgress, Typography } from "@material-ui/core";
+
 import Callable from "../../util/Callable";
 import DCompletionHistory from "../../util/Completions/DCompletionHistory";
 import DDatasetBase from "../../util/DDatasetBase";
 import DGoalList from "../../util/DGoalList";
 import { CompletionType } from "../../util/GoalFormat";
 import SortedList from "../../util/Sort/SortedList";
-import GoalView, { GoalViewMode } from "../goalView";
 
-import styles from "../list.module.css"
 import AnalyticsItem from "./analyticsItem";
+
+import styles from "../list.module.css";
 
 type AnalyticsViewParams = {
     goalList: DGoalList;
@@ -64,12 +58,12 @@ class AnalyticsView extends React.Component<AnalyticsViewParams, AnalyticsViewSt
         }
         this.setState({
             listeningTo: []
-        })
+        });
     }
 
     onGoalListChanged(){
-        let booleanTypeCH = [];
-        let numeralTypeCH = [];
+        const booleanTypeCH = [];
+        const numeralTypeCH = [];
 
         const goals = this.props.goalList.getGoals();
         if(goals == null) return;
@@ -95,12 +89,12 @@ class AnalyticsView extends React.Component<AnalyticsViewParams, AnalyticsViewSt
         }
 
 
-        const currStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => {return a.analytics.current_streak - b.analytics.current_streak});
-        const longestStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => {return a.analytics.longest_streak - b.analytics.longest_streak});
-        const currNoStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => {return a.analytics.current_no_streak - b.analytics.current_no_streak});
-        const percentage = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => {return a.analytics.percentage - b.analytics.percentage});
+        const currStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => a.analytics.current_streak - b.analytics.current_streak);
+        const longestStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => a.analytics.longest_streak - b.analytics.longest_streak);
+        const currNoStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => a.analytics.current_no_streak - b.analytics.current_no_streak);
+        const percentage = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => a.analytics.percentage - b.analytics.percentage);
 
-        const lowestDeviation = new SortedList<DCompletionHistory>(numeralTypeCH, (a, b) => {return b.analytics.standard_deviation - a.analytics.standard_deviation});
+        const lowestDeviation = new SortedList<DCompletionHistory>(numeralTypeCH, (a, b) => b.analytics.standard_deviation - a.analytics.standard_deviation);
         
         this.setState({currStreak, longestStreak, percentage, lowestDeviation, currNoStreak});
     }
@@ -108,7 +102,7 @@ class AnalyticsView extends React.Component<AnalyticsViewParams, AnalyticsViewSt
 
     render(){
         if(this.state.currStreak == null){
-            return <CircularProgress />
+            return <CircularProgress />;
         }
 
         const numCards = 3;
@@ -134,7 +128,7 @@ class AnalyticsView extends React.Component<AnalyticsViewParams, AnalyticsViewSt
                         getExtraText={(v) => (v.analytics.num_elements > 4) && `deviation of ${Math.round(v.analytics.standard_deviation)}`} />
                 </div>
             </div>
-        )
+        );
     }
 };
 

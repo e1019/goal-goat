@@ -1,9 +1,10 @@
 import { Session } from "@inrupt/solid-client-authn-browser";
-import { DGoal } from "./DGoal";
-import { getPodUri } from "./SolidUtil";
-import DDatasetBase from "./DDatasetBase";
-import Callable from "./Callable";
+
 import HashMap, { StringHasher } from "./Map/HashMap";
+import DDatasetBase from "./DDatasetBase";
+import { getPodUri } from "./SolidUtil";
+import { DGoal } from "./DGoal";
+
 
 const INDEX_FILE = "index.ttl";
 
@@ -70,22 +71,20 @@ class DGoalList extends DDatasetBase {
         }
 
         const val = this.cache.urlToGoal.get(url);
-        if(val){
-            return val;
-        }else{
-            const goal = this.findGoalInList(url);
-            if(!goal) return null;
-            
-            this.cache.urlToGoal.insert(url, goal);
-            return goal;
-        }
+        if(val) return val;
+        
+        const goal = this.findGoalInList(url);
+        if(!goal) return null;
+        
+        this.cache.urlToGoal.insert(url, goal);
+        return goal;
     }
 
 
     // Factory method to generate DGoalList from a Session
     static async fromSession(session: Session): Promise<DGoalList> {
         const pod: string = await getPodUri(session);
-        const containerUri: string = `${pod}goals/`;
+        const containerUri = `${pod}goals/`;
 
         return new DGoalList(containerUri, session);
     }

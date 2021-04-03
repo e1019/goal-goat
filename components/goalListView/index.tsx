@@ -1,22 +1,17 @@
-import { Button, CircularProgress, Typography } from "@material-ui/core";
 import React from "react";
+
+import { CircularProgress, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
+
+import DDatasetBase from "../../util/DDatasetBase";
+import DGoalList from "../../util/DGoalList";
 import Callable from "../../util/Callable";
 import { DGoal } from "../../util/DGoal";
-import DGoalList from "../../util/DGoalList";
 
-import GoalView, { GoalViewMode } from "../goalView"
-import { History } from 'history';
+import GoalView, { GoalViewMode } from "../goalView";
 
-import styles from "../list.module.css"
+import styles from "../list.module.css";
 
-import {
-    BrowserRouter,
-    Switch,
-    Route,
-    Link,
-    Provider
-} from "react-router-dom";
-import DDatasetBase from "../../util/DDatasetBase";
 
 type GoalListViewProps = {
     goalList: DGoalList;
@@ -77,7 +72,7 @@ class GoalListView extends React.Component<GoalListViewProps, GoalListViewState>
 
     render(){
         if(!this.props.goalList.ready || this.state.goals == null){
-            return <CircularProgress />
+            return <CircularProgress />;
         }
         
         if(this.state.goals.length == 0){
@@ -87,23 +82,23 @@ class GoalListView extends React.Component<GoalListViewProps, GoalListViewState>
                         You have no goals. Would you like to <Link to="/add">create one?</Link>
                     </Typography>
                 </div>
-            )
+            );
         }
 
         let goalsArray = [];
         if(this.props.timed){
             for(const goal of this.state.goals){
                 const txt = goal.completionHistory.getCompletionTimeRemaining();
-                if(!!txt){
+                if(txt){
                     goalsArray.push(this.renderGoal(goal, txt));
                 }
-                if(!goal.completionHistory.ready) return <CircularProgress />
+                if(!goal.completionHistory.ready) return <CircularProgress />;
             }
 
             if(goalsArray.length == 0){
                 return (<Typography>
                     Looks like you've caught up with everything! You have no goals left to complete.
-                </Typography>)
+                </Typography>);
             }
         }else{
             goalsArray = this.state.goals.map((goal) => this.renderGoal(goal));

@@ -1,8 +1,6 @@
-import { Dialog, DialogTitle } from "@material-ui/core";
 import React from "react";
-
+import { Dialog, DialogTitle } from "@material-ui/core";
 import styles from "./style.module.css";
-
 
 type DialogProps = {
     onClose: (props: any) => void;
@@ -30,7 +28,7 @@ abstract class DialogBase<P = {}, S = {}> extends React.Component<DialogProps & 
     render() {
         return (
             <Dialog open={this.props.open}
-                onClose={(event, reason) => {
+                onClose={() => {
                     this.close();
                 }}
             >
