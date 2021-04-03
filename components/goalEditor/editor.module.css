@@ -1,0 +1,35 @@
+.parDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.editorItem {
+    padding-top: 16px;
+    width: 100%;
+    display: inline-grid;
+}
+
+.editorItem3x {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.editorItemWithIcon{
+    grid-template-columns: 1fr 24px;
+}
+
+.categoryImageInner {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    height: min-content;
+}
+
+
+.actionButton {
+    composes: actionButton from "../list.module.css";
+}
+
+.actionButtonList {
+    composes: actionButtonList from "../list.module.css";
+}

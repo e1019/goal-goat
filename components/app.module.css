@@ -1,0 +1,94 @@
+.mainDiv {
+    width: 100%;
+    max-width: 500px;
+}
+
+.routeContents {
+    padding: 24px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    margin: 8px;
+    background-color: #FAFAFA;
+    border: 4px #E7E7E7 solid;
+}
+
+.padded {
+    padding: 16px;
+    padding-top: 0px;
+    padding-bottom: 16px;
+}
+
+.app {
+    display: flex;
+    justify-content: center;
+}
+
+
+.topNavBar {
+    background-color: #FFF;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+}
+
+@media (min-width: 500px) {
+    .topNavBar {
+        margin-left: 32px;
+        margin-right: 32px;
+    }
+
+    .navButton {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+@media (max-width: 500px) {
+    .topNavBar {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+@media (min-width: 350px) and (max-width: 500px) {
+    .navButton {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 500px) {
+    .navButton {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (min-width: 350px) {   
+    .navButtonHolder {
+        margin: 8px;
+    }
+}
+
+@media (max-width: 350px) {   
+    .navButtonHolder {
+        margin: 4px;
+    }
+}
+
+@media (max-width: 300px) {
+    .navButton {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+
+.navButton {
+    background-color: #E7E7E7;
+    padding: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

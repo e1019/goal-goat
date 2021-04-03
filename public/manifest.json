@@ -1,0 +1,16 @@
+{
+    "name": "GoalGoat",
+    "short_name": "GoalGoat - habit and goal tracking",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#90cdf4",
+    "theme_color": "#90cdf4",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "/logo-256x256.png",
+        "type": "image/png",
+        "sizes": "256x256"
+      }
+    ]
+  }

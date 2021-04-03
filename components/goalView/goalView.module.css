@@ -1,0 +1,18 @@
+.categoryImage {
+    margin-left: 4px;
+    margin-right: 16px;
+}
+
+.categoryImageInner {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.cardMain {
+    display: flex;
+}
+
+.cardRightSide {
+
+}

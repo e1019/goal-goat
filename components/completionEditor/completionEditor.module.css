@@ -1,0 +1,9 @@
+.innerArea {
+    margin: 16px;
+    margin-top: 32px;
+    display: grid;
+}
+
+.goalContainer {
+    composes: goalContainer from "../list.module.css";
+}
