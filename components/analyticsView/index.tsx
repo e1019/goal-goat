@@ -89,12 +89,30 @@ class AnalyticsView extends React.Component<AnalyticsViewParams, AnalyticsViewSt
         }
 
 
-        const currStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => a.analytics.current_streak - b.analytics.current_streak);
-        const longestStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => a.analytics.longest_streak - b.analytics.longest_streak);
-        const currNoStreak = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => a.analytics.current_no_streak - b.analytics.current_no_streak);
-        const percentage = new SortedList<DCompletionHistory>(booleanTypeCH, (a, b) => a.analytics.percentage - b.analytics.percentage);
+        const currStreak = new SortedList<DCompletionHistory>(
+            booleanTypeCH.filter((v) => v.analytics.current_streak > 2),
+            (a, b) => a.analytics.current_streak - b.analytics.current_streak
+        );
 
-        const lowestDeviation = new SortedList<DCompletionHistory>(numeralTypeCH, (a, b) => b.analytics.standard_deviation - a.analytics.standard_deviation);
+        const longestStreak = new SortedList<DCompletionHistory>(
+            booleanTypeCH.filter((v) => v.analytics.longest_streak > 2),
+            (a, b) => a.analytics.longest_streak - b.analytics.longest_streak
+        );
+
+        const currNoStreak = new SortedList<DCompletionHistory>(
+            booleanTypeCH.filter((v) => v.analytics.current_no_streak > 2),
+            (a, b) => a.analytics.current_no_streak - b.analytics.current_no_streak
+        );
+
+        const percentage = new SortedList<DCompletionHistory>(
+            booleanTypeCH.filter((v) => v.analytics.num_elements > 4),
+            (a, b) => a.analytics.percentage - b.analytics.percentage
+        );
+
+        const lowestDeviation = new SortedList<DCompletionHistory>(
+            numeralTypeCH.filter((v) => v.analytics.num_elements > 4),
+            (a, b) => b.analytics.standard_deviation - a.analytics.standard_deviation
+        );
         
         this.setState({currStreak, longestStreak, percentage, lowestDeviation, currNoStreak});
     }
@@ -105,6 +123,19 @@ class AnalyticsView extends React.Component<AnalyticsViewParams, AnalyticsViewSt
             return <CircularProgress />;
         }
 
+        const numVisible = this.state.currNoStreak.length + this.state.currStreak.length
+            + this.state.longestStreak.length + this.state.percentage.length
+            + this.state.lowestDeviation.length;
+        
+        if(numVisible == 0){
+            return <div>
+                <Typography variant="h5">Analytics</Typography>
+                <Typography>
+                    As you get more goals and complete them, you will begin to see analytics here. Try adding more completions.
+                </Typography>
+            </div>;
+        }
+
         const numCards = 3;
 
         return (
@@ -113,19 +144,19 @@ class AnalyticsView extends React.Component<AnalyticsViewParams, AnalyticsViewSt
                 <div className={styles.list}>
 
                     <AnalyticsItem list={this.state.currNoStreak} itemsToShow={numCards} headerText="Current streaks of 'No'"
-                        getExtraText={(v) => (v.analytics.current_no_streak > 2) && `current streak of ${v.analytics.current_no_streak}`} />
+                        getExtraText={(v) => `current streak of ${v.analytics.current_no_streak}`} />
 
                     <AnalyticsItem list={this.state.currStreak} itemsToShow={numCards} headerText="Current streaks of 'Yes'"
-                        getExtraText={(v) => (v.analytics.current_streak > 2) && `current streak of ${v.analytics.current_streak}`} />
+                        getExtraText={(v) => `current streak of ${v.analytics.current_streak}`} />
 
                     <AnalyticsItem list={this.state.longestStreak} itemsToShow={numCards} headerText="Best streaks"
-                        getExtraText={(v) => (v.analytics.longest_streak > 2) && `longest streak of ${v.analytics.longest_streak}`} />
+                        getExtraText={(v) => `longest streak of ${v.analytics.longest_streak}`} />
 
                     <AnalyticsItem list={this.state.percentage} itemsToShow={numCards} headerText="Best reliability"
-                        getExtraText={(v) => (v.analytics.num_elements > 4) && `${Math.round(v.analytics.percentage * 100)}%`} />
+                        getExtraText={(v) => `${Math.round(v.analytics.percentage * 100)}%`} />
 
                     <AnalyticsItem list={this.state.lowestDeviation} itemsToShow={numCards} headerText="Lowest Standard deviation"
-                        getExtraText={(v) => (v.analytics.num_elements > 4) && `deviation of ${Math.round(v.analytics.standard_deviation)}`} />
+                        getExtraText={(v) => `deviation of ${Math.round(v.analytics.standard_deviation)}`} />
                 </div>
             </div>
         );

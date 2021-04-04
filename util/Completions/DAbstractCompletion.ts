@@ -14,12 +14,13 @@ abstract class DAbstractCompletion {
     private new_: boolean;
     public get new() { return this.new_; }
     public set new(to: boolean) {
-        if(to){
-            throw new Error("You may not mark an abstract completion as new!");
+        if(to && !this.new_){
+            throw new Error("You may not mark a completion as new again!");
         }
-        this.new_ = false;
+        this.new_ = to;
     }
-
+    
+    public readonly date: Date;
     protected thing: Thing;
 
     public get pThing() {
@@ -30,9 +31,6 @@ abstract class DAbstractCompletion {
         return asUrl(this.thing, "");
     }
 
-    public abstract getType(): CompletionType;
-
-    public readonly date: Date;
 
     constructor(date: Date, val?: string, thing?: Thing){
         if(thing) {
@@ -51,17 +49,22 @@ abstract class DAbstractCompletion {
         if(val) this.setValueFromString(val);
     }
 
+    // Return an Enum representing the completion type
+    public abstract getType(): CompletionType;
+
     // Get the value as human-readable string (Yes, No, 59, 5.382, etc)
     public abstract getAsString(): string;
 
     // Set the value from a string. Return true if it was valid.
     public abstract setValueFromString(val: string): boolean;
 
+    // Generate a self-contained editor, which calls onUpdate when the value has been changed
+    public abstract getEditor(onUpdate: Callable): EditorLayout;
+
+    
     public static isThingValid(thing: Thing): boolean {
         return getUrl(thing, NS.TYPE) === CompletionNS.TYPE;
     }
-
-    public abstract getEditor(onUpdate: Callable): EditorLayout;
 };
 
 const compareCompletions = (a: DAbstractCompletion, b: DAbstractCompletion): number => {

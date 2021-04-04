@@ -26,12 +26,9 @@ class SortedList<T = {}> {
         return this._list[idx];
     }
 
-    private comparison: Comparison<T>;
-
     constructor(unsortedList: T[], comparison: Comparison<T>){
         const sorter: AbstractSort<T> = new SORTING_ALGORITHM<T>(comparison);
         this._list = sorter.sort([...unsortedList]);
-        this.comparison = comparison;
     }
 
     // Binary search
@@ -57,7 +54,6 @@ class SortedList<T = {}> {
         if(this.empty) return null;
 
         const idx = this.searchIdx(x, searchComparison);
-        console.log("Search index result",idx);
         if(idx != null) return this.get(idx); else return null;
     }
 }

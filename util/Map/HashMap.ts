@@ -1,7 +1,7 @@
 import Node from "./Node";
 
-type Hasher<K = {}> = (key: K) => number;
 
+type Hasher<K = {}> = (key: K) => number;
 
 // djb2, from http://www.cse.yorku.ca/~oz/hash.html
 const StringHasher: Hasher<string> = (key: string): number => {

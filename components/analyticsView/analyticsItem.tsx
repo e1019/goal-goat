@@ -1,8 +1,11 @@
-import { CircularProgress, Typography } from "@material-ui/core";
 import React from "react";
+
+import { CircularProgress, Typography } from "@material-ui/core";
+
 import DCompletionHistory from "../../util/Completions/DCompletionHistory";
-import SortedList from "../../util/Sort/SortedList";
 import GoalView, { GoalViewMode } from "../goalView";
+import SortedList from "../../util/Sort/SortedList";
+
 import styles from "../list.module.css";
 
 type AnalyticsItemProps = {
@@ -24,7 +27,8 @@ class AnalyticsItem extends React.Component<AnalyticsItemProps> {
             if(!txt) continue;
             list.push(
                 <div key={i}>
-                    <GoalView goal={v.parentGoal} mode={GoalViewMode.RedirectToEdit} className={styles.listItem} extraText={txt} />
+                    <GoalView goal={v.parentGoal} mode={GoalViewMode.RedirectToEdit}
+                        className={styles.listItem} extraText={txt} />
                 </div>
             );
         }
