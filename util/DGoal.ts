@@ -94,8 +94,8 @@ class DGoal {
     }
 
     public set created(to: Date){
-        if(this.isNew){
-            setDatetime(this.associatedThing, HabitNS.CREATED, to);
+        if(this.isNew || this.created == null){
+            this.associatedThing = setDatetime(this.associatedThing, HabitNS.CREATED, to);
             this.contaminate();
         }
     }

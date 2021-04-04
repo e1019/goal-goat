@@ -44,6 +44,7 @@ class LoginForm extends React.Component<LoginFormParams, LoginFormState> {
                 <div className={styles.padded}>
                     <Typography>
                         Welcome to GoalGoat! A habit/goal tracking app. Please log in or register with your Solid provider below.
+                        
                     </Typography>
                 </div>
                 <div className={styles.padded}>
@@ -65,6 +66,11 @@ class LoginForm extends React.Component<LoginFormParams, LoginFormState> {
                             }}
                         />
                     </FormGroup>
+                </div>
+                <div className={styles.padded}>
+                    <Typography color="textSecondary" variant="subtitle2">
+                    If you don't have a Solid provider, simply click Log In and you'll be redirected to a page where you can click register. Come back to this page once you're done, and click Log In again.
+                    </Typography>
                 </div>
             </div>
         );

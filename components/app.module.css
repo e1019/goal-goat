@@ -48,6 +48,17 @@
         margin-left: 0px;
         margin-right: 0px;
     }
+
+    .padded {
+        padding: 4px;
+    }
+
+    .routeContents {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 12px;
+        border-color: #fafafa
+    }
 }
 
 @media (min-width: 350px) and (max-width: 500px) {
