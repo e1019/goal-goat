@@ -3,8 +3,8 @@
     "short_name": "GoalGoat - habit and goal tracking",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#90cdf4",
-    "theme_color": "#90cdf4",
+    "background_color": "#dedede",
+    "theme_color": "#dedede",
     "orientation": "portrait-primary",
     "icons": [
       {
