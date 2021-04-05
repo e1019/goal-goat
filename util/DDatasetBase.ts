@@ -116,6 +116,12 @@ abstract class DDatasetBase {
 
     protected async insertThing(thing: Thing) {
         if(!this.dataset) throw new Error("Dataset is not yet ready");
+
+        // currently, Solid is extremely unstable and likes to mess up
+        // when properties are changed. for this reason we need to
+        // remove the old Thing and insert the new one
+        await this.removeThing(thing);
+
         const changes = setThing(this.dataset, thing);
 
         await this.synchronizeDataset(changes);
