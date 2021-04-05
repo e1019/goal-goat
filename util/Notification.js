@@ -18,20 +18,20 @@ async function getNotificationPermission(){
 async function doNotification(){
     const serviceWorker = await registerServiceWorker();
     if(!serviceWorker) return;
-
-    const notifications = await serviceWorker.getNotifications({includeTriggered: true});
-    if(Array.isArray(notifications) && notifications.length > 0) return;
-
+    
     if(!(await getNotificationPermission())) return;
 
+    const notifications = await serviceWorker.getNotifications({includeTriggered: true});
+    if(Array.isArray(notifications)) notifications.forEach(v => v.close()); // cancel existing notifications
+
     const tomorrow = (new Date()).addDays(1);
-    const tomorrowMorning = new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 9);
+    tomorrow.setHours(9, 0, 0, 0);
 
     console.log("Scheduling notification...");
     serviceWorker.showNotification("Morning Notification", {
         tag: Math.random().toString(),
         body: "Good morning! Take this opportunity to view your goals for today! " + quote.getRandomQuote(),
-        showTrigger: new TimestampTrigger(tomorrowMorning.getTime()),
+        showTrigger: new TimestampTrigger(tomorrow.getTime()),
         icon: "/logo-256x256.png"
     });
 }
