@@ -38,7 +38,7 @@ class Motivate extends React.Component<{}, MotivateState> {
                 - {this.state.currQuote.author}
             </Typography>
 
-            <img src="https://picsum.photos/g/800/600" />
+            <img style={{height: "321px"}} src="https://picsum.photos/g/800/600" />
         </div>;
     }
 }
