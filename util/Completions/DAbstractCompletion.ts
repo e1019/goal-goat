@@ -1,6 +1,9 @@
+// This is an abstract completion class that all the completion types extend.
+// A completion type should implement the abstract methods including getType, getAsString, setValueFromString and getEditor
+
 import { asUrl, createThing, getUrl, setDatetime, setInteger, setUrl, Thing } from "@inrupt/solid-client";
 
-import { CompletionType, GoalInterval } from "../GoalFormat";
+import { CompletionType } from "../GoalFormat";
 import { CompletionNS } from "./CompletionUtil";
 import Callable from "../Callable";
 import { NS } from "../SolidUtil";

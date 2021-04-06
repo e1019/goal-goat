@@ -1,3 +1,11 @@
+// This component allows a goal to be edited.
+// Either a DGoal or a DGoalList can be provided.
+
+// If a DGoal is provided, that goal will be edited
+// If only a DGoalList is provided, a new goal will be created under that list
+
+// If neither are provided, you will get an error.
+
 import React from "react";
 
 import { Button, CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@material-ui/core";

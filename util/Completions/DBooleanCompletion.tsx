@@ -1,3 +1,5 @@
+// This class extends DAbstractCompletion and provides a boolean completion type
+
 import React from "react";
 
 import { Button } from "@material-ui/core";

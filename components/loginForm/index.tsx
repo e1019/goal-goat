@@ -1,3 +1,5 @@
+// This class provides the login page
+
 import React from "react";
 
 import { Button, TextField, FormGroup, Typography, CircularProgress } from "@material-ui/core";

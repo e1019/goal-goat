@@ -1,3 +1,4 @@
+// This class abstracts away comparison sorting algorithms.
 
 // A funtion which returns the value of A - B
 type Comparison<T = {}> = (a: T, b: T) => number;

@@ -1,3 +1,5 @@
+// This class extends DAbstractCompletion and provides a floating-point completion type
+
 import React from "react";
 
 import { getDatetime, getStringNoLocale, setStringNoLocale, Thing } from "@inrupt/solid-client";

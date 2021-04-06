@@ -1,3 +1,5 @@
+// This class provides a way to call methods on an object.
+
 class Callable {
     public readonly object: Object;
     public readonly func: () => void;

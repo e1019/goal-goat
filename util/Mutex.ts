@@ -1,3 +1,4 @@
+// Mutex class for safer asynchronous operation
 // Adapted from https://spin.atomicobject.com/2018/09/10/javascript-concurrency/
 
 class Mutex {

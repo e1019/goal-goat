@@ -1,3 +1,5 @@
+// This is a base dialog component that displays a dialog with some inner contents.
+
 import React from "react";
 import { Dialog, DialogTitle } from "@material-ui/core";
 import styles from "./style.module.css";

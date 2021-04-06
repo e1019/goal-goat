@@ -1,3 +1,7 @@
+// This displays all goals in a DGoalList.
+// If the `timed` property is true, then it will only display those that have 
+// a completion time remaining text.
+
 import React from "react";
 
 import { CircularProgress, Typography } from "@material-ui/core";

@@ -1,3 +1,5 @@
+// This class provides a list of goals.
+
 import { Session } from "@inrupt/solid-client-authn-browser";
 
 import HashMap, { StringHasher } from "./Map/HashMap";

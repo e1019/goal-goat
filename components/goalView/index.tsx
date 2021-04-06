@@ -1,3 +1,5 @@
+// This wraps GoalDataInner in a clickable card that redirects to another page.
+
 import React from "react";
 
 import { Card, CardActionArea, CardContent } from "@material-ui/core";

@@ -1,3 +1,5 @@
+// This is a single analytics item, mainly used by AnalyticsView index.tsx
+
 import React from "react";
 
 import { CircularProgress, Typography } from "@material-ui/core";

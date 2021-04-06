@@ -1,3 +1,5 @@
+// This class extends DAbstractCompletion and provides an integer completion type
+
 import React from "react";
 
 import { getDatetime, getInteger, setInteger, Thing } from "@inrupt/solid-client";

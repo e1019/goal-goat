@@ -1,5 +1,6 @@
+// This component provides a square that contains a motivational quote and photo.
+
 import React from "react";
-import coolImages from "cool-images";
 import quote from "inspirational-quotes";
 
 import { CircularProgress, Typography } from "@material-ui/core";
@@ -9,7 +10,6 @@ import styles from "./motivate.module.css";
 
 type MotivateState = {
     currQuote;
-    currImg: string;
 }
 
 class Motivate extends React.Component<{}, MotivateState> {
@@ -17,18 +17,17 @@ class Motivate extends React.Component<{}, MotivateState> {
         super(props);
         
         this.state = {
-            currQuote: null,
-            currImg: null
+            currQuote: null
         };
     }
 
     componentDidMount(){
-        this.setState({currQuote: quote.getQuote(), currImg: coolImages.one(600, 800, true, true)});
+        this.setState({currQuote: quote.getQuote()});
     }
 
+    // photos are provided by Lorem Picsum, https://picsum.photos/ 
     render(){
         if(!this.state.currQuote) return <CircularProgress />;
-        if(!this.state.currImg) return <CircularProgress />;
         return <div className={styles.container}>
 
             <Typography>

@@ -1,3 +1,6 @@
+// This component displays all of the completion data within a goal,
+// and wraps them in buttons that redirect to edit the completion data.
+
 import React from "react";
 
 import { Button, Card, CardActionArea, CardContent, Typography } from "@material-ui/core";

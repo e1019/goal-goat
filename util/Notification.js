@@ -1,3 +1,8 @@
+// This file schedules a morning notification when possible.
+// JavaScript was used over TypeScript becuase the necessary type definitions do not exist yet for TypeScript.
+
+// based off of the example https://notification-triggers.glitch.me/ 
+
 import quote from "inspirational-quotes";
 
 async function registerServiceWorker(){

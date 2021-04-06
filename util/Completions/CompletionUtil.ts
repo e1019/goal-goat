@@ -1,3 +1,6 @@
+// This provides a few utilities when dealing with completion types, including retrieving
+// a class based on an enum.
+
 import { getInteger, Thing } from "@inrupt/solid-client";
 
 import { CompletionType } from "../GoalFormat";

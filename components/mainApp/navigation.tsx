@@ -1,3 +1,5 @@
+// This is the navigation bar class that contains the navigation buttons
+
 import React from "react";
 import { Add, Home, List, Person, Timeline } from "@material-ui/icons";
 

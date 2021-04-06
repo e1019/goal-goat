@@ -1,3 +1,5 @@
+// This class defines a navigation button that has a target URL and an icon
+
 import React from "react";
 import { ButtonBase } from "@material-ui/core";
 import { withRouter, History } from "react-router-dom";

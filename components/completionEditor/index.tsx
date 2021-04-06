@@ -1,3 +1,7 @@
+// This is a component that edits a single completion.
+// A goal and a date must be provided.
+// A completion will be automatically found under that date, or a new one will be created.
+
 import React from "react";
 
 import { Button, CircularProgress, Link, Typography } from "@material-ui/core";

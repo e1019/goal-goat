@@ -1,3 +1,5 @@
+// This file defines the data format of a goal.
+
 import React from "react";
 
 import { Fastfood, Favorite, RecordVoiceOver, School, SportsFootball, Straighten, Work } from "@material-ui/icons";

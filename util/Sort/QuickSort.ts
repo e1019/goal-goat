@@ -1,5 +1,8 @@
 import AbstractSort from "./AbstractSort";
 
+
+// based off of the pseudocode implementation at https://www.geeksforgeeks.org/quick-sort/ 
+
 class QuickSort<T = {}> extends AbstractSort<T> {
     private array: T[];
 

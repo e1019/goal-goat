@@ -1,3 +1,4 @@
+// This file contains a few utilities for working with the Solid library.
 
 import {
     createSolidDataset,

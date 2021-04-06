@@ -1,3 +1,5 @@
+// This is a date picker dialog component that extends the dialog base class.
+
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
 

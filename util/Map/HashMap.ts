@@ -1,3 +1,8 @@
+// This class provides a hashmap that can be used to find values by key.
+// By default, 64 buckets are used with a linked list in each bucket.
+// If dealing with larger amounts of data, it may be useful to increase the number of buckets
+// when calling the constructor
+
 import Node from "./Node";
 
 

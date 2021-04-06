@@ -1,3 +1,5 @@
+// This component displays a bunch of analytical data about goals in a DGoalList
+
 import React from "react";
 
 import { CircularProgress, Typography } from "@material-ui/core";

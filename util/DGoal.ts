@@ -1,3 +1,5 @@
+// This class defines a single goal.
+
 import { 
     asUrl,
     createThing,

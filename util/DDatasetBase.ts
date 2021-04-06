@@ -1,4 +1,4 @@
-
+// This abstract class is the base behind DGoalList and DCompletionHistory. It abstracts away working with a Solid dataset file.
 import {
     deleteSolidDataset,
     saveSolidDatasetAt,

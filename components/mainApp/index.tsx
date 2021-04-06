@@ -1,3 +1,6 @@
+// This is the main application class. It contains the routing logic and displays the right components
+// and also displays the navigation bar
+
 import React from "react";
 import base64url from "base64url";
 

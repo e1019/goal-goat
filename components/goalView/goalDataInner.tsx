@@ -1,3 +1,7 @@
+// This displays human-readable information for a goal. Name, category icon, interval and type.
+// In addition, the extraText property allows additional text to be added
+// for example how many hours remain for this goal
+
 import React from "react";
 
 import { Typography } from "@material-ui/core";

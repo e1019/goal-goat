@@ -1,3 +1,5 @@
+// This class provides a sorted list. The sorted contents can either be accessed, or a binary search could be done.
+
 import QuickSort from "./QuickSort";
 import AbstractSort, { Comparison } from "./AbstractSort";
 

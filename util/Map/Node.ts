@@ -1,3 +1,5 @@
+// A simple linked list
+
 class Node {
     private _nextNode: Node = null;
     public get nextNode(){ return this._nextNode; }

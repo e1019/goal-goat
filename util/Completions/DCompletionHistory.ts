@@ -1,3 +1,7 @@
+// Similar to a DGoalList, this deals with a specific goal and provides a list of all completion data in a given goal.
+// However, it also allows searching by date and getting analytics.
+// Each active DGoal has a DCompletionHistory.
+
 import { createCompletionFromThing, createCompletionOfType } from "./CompletionUtil";
 import DAbstractCompletion, { compareCompletions } from "./DAbstractCompletion";
 import { GoalInterval, goalIntervalData } from "../GoalFormat";
